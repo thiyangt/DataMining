@@ -1,4 +1,4 @@
-baseurl: /
+baseurl: https://thiyanga-datamining.netlify.app/
 languageCode: en-us
 theme: hugo-theme-hello-friend
 paginate: 5

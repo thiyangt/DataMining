@@ -1,0 +1,36 @@
+baseurl: /
+languageCode: en-us
+theme: hugo-theme-hello-friend
+paginate: 5
+params:
+  contentTypeName: post
+  defaultTheme: dark
+  showMenuItems: 2
+  showReadingTime: no
+languages:
+  en:
+    copyright: ''
+    dateFormatList: '2006-01-02'
+    dateFormatSingle: '2006-01-02'
+    keywords: ''
+    menu:
+      main:
+        - identifier: about
+          name: About
+          url: /about
+        - identifier: showcase
+          name: Showcase
+          url: /showcase
+    menuMore: Show more
+    minuteReadingTime: min read
+    newerPosts: Newer posts
+    olderPosts: Older posts
+    params:
+      logo:
+        logoHomeLink: /
+        logoText: Data Mining
+    readMore: Read more
+    readOtherPosts: 
+    subtitle: 
+    title: Data Mining
+    writtenBy: Dr Thiyanga Talagala

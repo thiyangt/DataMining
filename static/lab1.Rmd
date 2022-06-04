@@ -1,0 +1,36 @@
+---
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Packages
+
+```{r, message=FALSE, warning=FALSE}
+library(naniar)
+library(tidyverse)
+```
+
+## Data
+
+```{r}
+library(car)
+data(prestige)
+
+```
+
+## Training and test set
+
+```{r}
+df <- Prestige %>% mutate(id = row_number())
+## set the seed to make your partition reproducible
+set.seed(123)
+train <- df %>% sample_frac(.80)
+dim(train)
+head(train)
+test <- anti_join(df, train, by = 'id')
+dim(test)
+```
+

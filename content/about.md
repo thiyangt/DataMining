@@ -6,7 +6,7 @@ Here's your roadmap for the semester!
 
 ## Week 1
 
-Course outline
+[Course outline](/DM.docx)
 
-|Slides    	|  Reading | Lab-Tutorial | Problems 
+|[Slides](/L1/L1.pdf)    	|  Reading | Lab-Tutorial | Problems 
 |:-:	|:-:	|:-:	|:-:|

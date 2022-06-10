@@ -13,5 +13,5 @@ Here's your roadmap for the semester!
 
 ## Week 2
 
-|[Slides](/L2/L2.pdf)    	|  Reading-Chapter 9 | Lab-Tutorial | Problems 
+|[Slides](/L2/L2.pdf)    	|  [Reading](https://juliasilge.com/blog/wind-turbine/) | Lab-Tutorial | Problems 
 |:-:	|:-:	|:-:	|:-:|

@@ -1,7 +1,7 @@
 ---
 title: STA 529 2.0 Data Mining
 author: Dr Thiyanga S. Talagala
-date: \today
+date: "June 4, 2022"
 institute: "Lecture 1"
 output: binb::metropolis
 fontsize: 12pt
@@ -209,14 +209,7 @@ $$MPE = \frac{1}{n}\sum_{i=1}^n \frac{e_i}{y_i}$$
 
 $$MAPE = \frac{1}{n}\sum_{i=1}^n |\frac{e_i}{y_i}|$$
 
-## Accuracy Measures on Training Set vs Test Set
 
-Accuracy measure on training set: Tells about the model fit
-
-
-Accuracy measure on test set: Model ability to predict new data
-
-## Example
 
 
 ## Root Mean Squared Error
@@ -227,6 +220,15 @@ $$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^n e^2_i}$$
 ## Visualizaion of error distribution
 
 Graphical representations reveal more than metrics alone.
+
+## Accuracy Measures on Training Set vs Test Set
+
+Accuracy measure on training set: Tells about the model fit
+
+
+Accuracy measure on test set: Model ability to predict new data
+
+## Example
 
 ## Evaluate Classifier Against Benchmark
 

@@ -113,7 +113,7 @@ rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE)
 ggplot(data, aes(x=Sepal.Length, y=Sepal.Width, col=Species)) + geom_point() + scale_color_manual(values = c("#1b9e77", "#d95f02")) + coord_fixed() + geom_vline(xintercept = 5.5) 
 ```
 
-##  Root node split, Decision node split - 1
+##  Root node split, Decision node split - right
 
 ```{r, echo=FALSE}
 ggplot(data, aes(x=Sepal.Length, y=Sepal.Width, col=Species)) + geom_point() + scale_color_manual(values = c("#1b9e77", "#d95f02")) + coord_fixed() + geom_vline(xintercept = 5.5) + geom_hline(yintercept = 3)
@@ -192,6 +192,14 @@ split that increases the homogeneity .
 ggplot(data, aes(x=Sepal.Length, y=Sepal.Width, col=Species)) + geom_point() + scale_color_manual(values = c("#1b9e77", "#d95f02")) + coord_fixed() + geom_vline(xintercept = 5.5) 
 ```
 
+## Key idea
+
+1. Iteratively split variables into groups
+
+2. Evaluate "homogeneity" within each group
+
+3. Split again if necessary
+
 ## How does a decision tree determine the best split?
 
 Decision tree uses entropy and information gain to select a feature which gives the best split.
@@ -216,14 +224,156 @@ $p_k$ - proportion of records in rectangle $A$ that belong to class $k$
 
 - Gini index takes value 0 when all the records belong to the same class.
 
-- 1 denotes that the elements are randomly distributed across various classes.
 
 ## Gini index (cont)
 
-Gini index is at peak when $p_k = 0.5$
+In the two-class case Gini index is at peak when $p_k = 0.5$
 
-## Example: Calculation
+
 
 ## Entropy measure
 
 $$entropy(A) = - \sum_{k=1}^{m}p_k log_2(p_k)$$
+
+## Example: Calculation (left)
+
+
+```{r, echo=FALSE, out.height="70%"}
+df <- data.frame(x=rep(c(2, 4, 6, 8), each=4),
+                 y=rep(c(2, 4, 6, 8), times=4), col=factor(c(rep("red", 15), "blue")))
+ggplot(df, aes(x=x, y=y, col=col)) + geom_point(size=4)
+```
+
+## Example: calculation (right) (cont.) 
+
+```{r, echo=FALSE, out.height="70%"}
+df <- data.frame(x=rep(c(2, 4, 6, 8), each=4),
+                 y=rep(c(2, 4, 6, 8), times=4), col=factor(c(rep("red", 8), rep("blue", 8))))
+ggplot(df, aes(x=x, y=y, col=col)) + geom_point(size=4)
+```
+
+## Finding the best threshold split?
+
+In-class demonstration
+
+
+
+## Overfitting in decision trees
+
+- Overfitting refers to the condition when the model completely fits the training data but fails to generalize the testing unseen data.
+
+- If a decision tree is fully grown or when you increase the depth of the decision tree, it may lose some generalization capability.
+
+- Pruning is a technique that is used to reduce overfitting. Pruning simplifies a decision tree by removing the weakest rules.
+
+
+
+## Stopping criteria
+
+- Tree depth (number of splits)
+
+- Minimum number of records in a terminal node
+
+- Minimum reduction in impurity
+
+- Complexity parameter ($CP$ ) - available in `rpart` package
+
+## Pre-pruning (early stopping)
+
+- Stop the learning algorithm **before** the tree becomes too complex
+
+- **Hyperparameters** of the decision tree algorithm that can be tuned to get a robust model
+
+`max_depth`
+
+`min_samples_leaf`
+
+`min_samples_split`
+
+## Post pruning
+
+Simplify the tree **after** the learning algorithm terminates
+
+The idea here is to allow the decision tree to grow fully and observe the CP value
+
+## Simplify the tree after the learning algorithm terminates
+
+- Complexity of tree is measured by number of leaves. 
+
+$L(T) = \text{number of leaf nodes}$
+
+- The more leaf nodes you have, the more complexity.
+
+- We need a balance between complexity and predictive power
+
+Total cost = measure of fit + measure of complexity
+
+## Total cost = measure of fit + measure of complexity
+
+measure of fit: error
+
+measure of complexity: number of leaf nodes ($L(T)$)
+
+$\text{Total cost } (C(T)) = Error(T) + \lambda L(T)$
+
+
+The parameter $\lambda$ trade off between complexity and predictive power. The parameter $\lambda$ is a penalty factor for tree size.
+
+$\lambda = 0$: Fully grown decision tree
+
+$\lambda = \infty$: Root node only
+
+$\lambda$ between 0 and $\infty$ balance predictive power and complexity.
+
+## Example: candidate for pruning (in-class)
+
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# Load rpart and rpart.plot
+library(rpart)
+library(rpart.plot)
+# Create a decision tree model
+tree <- rpart(Species~Sepal.Length + Sepal.Width, data=data, cp=.02)
+# Visualize the decision tree with rpart.plot
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE)
+
+```
+
+## Classification trees - label of terminal node
+
+![](fi3.png)
+
+labels are based on majority votes.
+
+## Regression Trees
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+# Load rpart and rpart.plot
+library(rpart)
+library(rpart.plot)
+# Create a decision tree model
+tree <- rpart(Petal.Length~Sepal.Length + Sepal.Width, data=data, cp=.02)
+# Visualize the decision tree with rpart.plot
+rpart.plot(tree, box.palette="RdBu", shadow.col="gray", nn=TRUE)
+
+```
+
+## Regression Trees
+
+Value of the terminal node: average outcome value of the training records that were in that terminal node.
+
+**Your turn: ** Impurity measures for regression tree
+
+## Decision trees - advantages
+
+- Easy to interpret
+
+- Better performance in non-linear setting
+
+-  No feature scaling required
+
+## Decision trees - disadvantages
+
+- Unstable: Adding a new data point or little bit of noise can lead to re-generation of the overall tree and all nodes need to be recalculated and recreated.
+
+- Not suitable for large datasets

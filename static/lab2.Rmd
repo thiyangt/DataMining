@@ -1,0 +1,64 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+## Packages
+
+```{r}
+library(tidymodels)
+library(tidyverse)
+library(palmerpenguins)
+library(rpart)
+library(skimr)
+library(rpart.plot)
+```
+
+## Data
+
+```{r}
+data(penguins)
+skim(penguins)
+```
+
+## Split data
+
+```{r}
+set.seed(123)
+penguin_split <- initial_split(penguins)
+penguin_train <- training(penguin_split)
+dim(penguin_train)
+head(penguin_train)
+penguin_test <- testing(penguin_split)
+dim(penguin_test)
+```
+
+## Build decision tree
+
+```{r}
+tree1 <- rpart(species ~ ., penguin_train,  cp = 0.1)
+rpart.plot(tree1, box.palette="RdBu", shadow.col="gray", nn=TRUE)
+tree2 <- rpart(species ~ ., penguin_train,  cp = 0.5)
+rpart.plot(tree2, box.palette="RdBu", shadow.col="gray", nn=TRUE)
+```
+
+
+
+
+## Predict
+
+```{r}
+predict(tree1, penguin_test)
+t_pred <- predict(tree1, penguin_test, type = "class")
+t_pred
+```
+
+## Accuracy
+
+```{r}
+confMat <- table(penguin_test$species,t_pred)
+confMat
+```

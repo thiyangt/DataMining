@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/about/</loc>
+    <loc>https://thiyanga-datamining.netlify.app/about/</loc>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>https://thiyanga-datamining.netlify.app/categories/</loc>
   </url><url>
-    <loc>/</loc>
+    <loc>https://thiyanga-datamining.netlify.app/</loc>
   </url><url>
-    <loc>/post/hello/</loc>
+    <loc>https://thiyanga-datamining.netlify.app/post/hello/</loc>
   </url><url>
-    <loc>/post/</loc>
+    <loc>https://thiyanga-datamining.netlify.app/post/</loc>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>https://thiyanga-datamining.netlify.app/tags/</loc>
   </url>
 </urlset>

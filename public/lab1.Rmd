@@ -1,0 +1,45 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Packages
+
+```{r, message=FALSE, warning=FALSE}
+library(naniar)
+library(tidyverse)
+```
+
+## Data
+
+```{r}
+library(palmerpenguins)
+data(penguins)
+summary(penguins)
+```
+
+## Visualizing missing data
+
+```{r}
+ggplot(data = penguins,
+       aes(x = bill_length_mm ,
+           y = bill_depth_mm )) +
+  geom_miss_point()
+```
+
+```{r}
+gg_miss_upset(penguins)
+```
+
+```{r}
+gg_miss_var(penguins)
+```
+
+```{r}
+gg_miss_span(penguins,
+             var = bill_depth_mm,
+             span_every = 10)
+```

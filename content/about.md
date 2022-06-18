@@ -15,3 +15,8 @@ Here's your roadmap for the semester!
 
 |[Slides](/L2/L2.pdf)    	|  [Reading](https://juliasilge.com/blog/wind-turbine/) | [Lab-Tutorial](/lab2.html) | Problems 
 |:-:	|:-:	|:-:	|:-:|
+
+## Week 3
+
+|[Slides](/L3/L3.pdf)    	|  Reading | Lab-Tutorial | Problems 
+|:-:	|:-:	|:-:	|:-:|

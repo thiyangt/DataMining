@@ -18,5 +18,5 @@ Here's your roadmap for the semester!
 
 ## Week 3
 
-|[Slides](/L3/L3.pdf)    	|  Reading | Lab-Tutorial | Problems 
+|[Slides](/L3/L3.pdf)    	|  Reading | [Lab-Tutorial](/L3lab.R) | Problems 
 |:-:	|:-:	|:-:	|:-:|

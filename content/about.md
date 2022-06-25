@@ -20,3 +20,8 @@ Here's your roadmap for the semester!
 
 |[Slides](/L3/L3.pdf)    	|  Reading | [Lab-Tutorial](/L3lab.R) | Problems 
 |:-:	|:-:	|:-:	|:-:|
+
+## Week 4
+
+|[Slides](/L4/L4.pdf)    	|  Reading | [Lab-Tutorial](/L4lab.R) | Problems 
+|:-:	|:-:	|:-:	|:-:|

@@ -1,0 +1,185 @@
+---
+title: STA 529 2.0 Data Mining
+author: Dr Thiyanga S. Talagala
+date: "Random Forests"
+institute: "Lecture 4"
+output: binb::metropolis
+fontsize: 12pt
+header-includes: 
+  - \usepackage{multirow}
+---
+
+```{r,setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+
+
+## Random Forests vs AdaBoost
+
+
+\begin{table}[!h]
+\begin{tabular}{|p{2cm}|p{3cm}|p{4cm}|}
+\hline
+Category & Random Forest  & AdaBoost \\ \hline
+Tree size & Fully grown & Decision stump \\ \hline
+Tree construction & Independent & Each stump is made by taking the previous stump’s mistakes into account \\ \hline
+Say for each tree & Equal & Some stumps get more say \\ \hline
+ & parallel  &  sequential\\ \hline
+\end{tabular}
+\end{table}
+
+## Data
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, comment=NA}
+smoking <- c("Yes", "No", "Yes", "Yes", "No", "No", "Yes", "Yes")
+family_history <- c("Yes", "Yes", "No", "Yes", "Yes", "Yes", "No", "Yes")
+height <- c(5.3, 6, 5.2, 5, 5.9, 4.7, 5.2, 5.4)
+cancer <- c("Yes", "Yes", "Yes", "Yes", "No", "No", "No", "No")
+df <- data.frame(smoking, family_history, height, cancer)
+df
+```
+
+## Creating the first decision stump
+
+
+1) Initial weights
+
+```{r, comment=NA, echo=FALSE, size="tiny"}
+df$Ini_weights <- rep(0.125, 8)
+df
+```
+
+## Decision stump  (In-class)
+
+Smoking ?
+
+Height? Splitting point?
+
+Family_history?
+
+
+## Decision stump
+
+Your turn
+
+Compute node Gini coefficient for Smoking and Family History and Height > 5.1
+
+## Frist decision stump
+
+In-class
+
+
+Compute total error.
+
+## Amount of say
+
+$$\text{Amount of say} = \frac{1}{2} log \left(\frac{1-\text{Total Error}}{\text{Total Error}}\right)$$
+
+Compute the amount of say for the first decision stump.
+
+## Amount of say vs Total error
+
+```{r, echo=FALSE}
+library(ggplot2)
+x <- seq(0.001, 0.999, length = 100)
+y <- 0.5*(log((1-x)/x))
+df2 <- data.frame(total_error=x, amount_of_say=y)
+ggplot(df2, aes(x=total_error, y=amount_of_say)) + geom_line()
+```
+
+## Building the next decision stump
+
+```{r, echo=FALSE, comment=NA}
+df
+```
+
+## New observation weights for incorrect classifications
+
+$$\text{New observation weight} = \text{initial weight} \times e^{\text{Amount of say}}$$
+
+```{r, echo=FALSE}
+x <- seq(1, 10, length = 100)
+y <- exp(x)
+df2 <- data.frame(amount_of_say=x, e_amount_of_say=y)
+ggplot(df2, aes(x=amount_of_say, y=e_amount_of_say)) + geom_line()
+```
+
+
+## New observation weights for correct classifications
+
+$$\text{New observation weight} = \text{initial weight} \times e^{\text{-Amount of say}}$$
+
+```{r, echo=FALSE}
+x <- seq(1, 10, length = 100)
+y <- exp(-x)
+df2 <- data.frame(amount_of_say=x, e_amount_of_say=y)
+ggplot(df2, aes(x=amount_of_say, y=e_amount_of_say)) + geom_line()
+```
+
+## Initial weights + new weights
+
+```{r, echo=FALSE, comment=NA}
+int_weights <- rep(0.125, 8)
+new_weights <- c(0.05, 0.05, 0.05, 0.33, 0.05, 0.05, 0.05, 0.05)
+df4 <- data.frame(ini_weights=int_weights, new_weights = new_weights)
+df4
+```
+
+## Initial weights + new weights + normalized weights
+
+```{r, echo=FALSE, comment=NA}
+int_weights <- rep(0.125, 8)
+new_weights <- c(0.05, 0.05, 0.05, 0.33, 0.05, 0.05, 0.05, 0.05)
+normalized_weights <- new_weights/0.68
+df4 <- data.frame(ini_weights=int_weights, new_weights = new_weights, normalized_weights=normalized_weights)
+df4
+```
+
+## Create the next decision stump - inclass
+
+
+
+## Adaboost final decision - inclass
+
+
+## Adaboost vs Gradient Boosting Algorithm
+
+
+
+\begin{table}[!h]
+\begin{tabular}{|p{2cm}|p{3cm}|p{4cm}|}
+\hline
+Category & AdaBoost  & Gradient Boosting \\ \hline
+Tree size & Decision stump & Statrts by making a single leaf and then grow trees\\ \hline
+Tree construction & Up weights the observations misclassified before & identify observations by large residuals computed in the previous iteration  \\ \hline
+Say for each tree & Not Equal & Equal \\ \hline
+Tree construction & sequential  &  sequential\\ \hline
+\end{tabular}
+\end{table}
+
+# Gradient Boosting - Regression
+
+## Dataset
+
+```{r, echo=FALSE, comment=NA}
+colour <- c("blue", "brown", "blue", "black", "brown", "blue")
+gender <- c("M", "F", "F", "M", "M", "F")
+tusk_length <- c(1.6, 1.6, 1.5, 1.8, 1.5, 1.4)
+bmi <- c(2.3, 2.4, 3.2, 3.4, 3.5, 2.1)
+df4 <- data.frame(colour = colour, gender = gender, tusk_length = tusk_length, bmi)
+df4
+```
+
+## Initial guess
+
+
+## Compute residuals
+
+
+## Predict BMI
+
+## Continue building trees
+
+## Final prediction
+
+

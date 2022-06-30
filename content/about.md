@@ -29,3 +29,6 @@ Here's your roadmap for the semester!
 ## Week 5
 
 [Mini project](/miniproject.html)
+
+## Week 6
+

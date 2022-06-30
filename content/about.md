@@ -25,3 +25,7 @@ Here's your roadmap for the semester!
 
 |[Slides](/L4.pdf)    	|  Reading | [Lab-Tutorial](/L4lab.R) | Problems 
 |:-:	|:-:	|:-:	|:-:|
+
+## Week 5
+
+[Mini project](/miniproject.html)

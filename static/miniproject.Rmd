@@ -1,0 +1,48 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, comment=NA, message=FALSE, warning = FALSE)
+```
+
+## R package
+
+```{r}
+## obtain data
+library(MLDataR)
+## data analysis
+library(tidyverse)
+```
+
+## Data set - Thyroid Disease dataset
+
+```{r}
+data(MLDataR::thyroid_disease)
+```
+
+## Get a glimpse of your data
+
+```{r}
+glimpse(thyroid_disease)
+```
+
+
+## Split data into training and test
+
+```{r}
+df <- thyroid_disease %>% mutate(id = row_number())
+## set the seed to make your partition reproducible
+set.seed(123)
+train <- df %>% sample_frac(.80)
+dim(train)
+test <- anti_join(df, train, by = 'id')
+dim(test)
+
+```
+
+# Your turn
+
+Develop a model to predict `ThryroidCLass`.
+
+

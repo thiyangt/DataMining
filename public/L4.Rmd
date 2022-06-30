@@ -1,7 +1,7 @@
 ---
 title: STA 529 2.0 Data Mining
 author: Dr Thiyanga S. Talagala
-date: "Random Forests"
+date: "AdaBoost and Gradient Boosting"
 institute: "Lecture 4"
 output: binb::metropolis
 fontsize: 12pt
@@ -170,15 +170,15 @@ df4 <- data.frame(colour = colour, gender = gender, tusk_length = tusk_length, b
 df4
 ```
 
-## Initial guess
+## Initial guess - inclass
 
 
-## Compute residuals
+## Compute residuals - inclass
 
 
-## Predict BMI
+## Predict BMI - inclass
 
-## Continue building trees
+## Continue building trees - inclass
 
 ## Final prediction
 

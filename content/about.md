@@ -30,7 +30,7 @@ Here's your roadmap for the semester!
 
 [Mini project](/miniproject.html)
 
-|[Slides](/L5.pdf)    	|  Reading | [Lab-Tutorial](/lab5.html) | Problems 
+|[Slides](/L5.pdf)    	|  [Reading](https://topepo.github.io/caret/available-models.html) | [Lab-Tutorial](/lab5.html) | Problems 
 |:-:	|:-:	|:-:	|:-:|
 
 ## Week 6

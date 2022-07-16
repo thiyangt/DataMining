@@ -1,0 +1,157 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Cross-validation
+
+## Split data into training and test
+
+```{r}
+library(ISLR2)
+set.seed (1)
+train <- sample (392 , 196)
+train
+```
+
+## Data
+
+```{r}
+data(Auto)
+head(Auto)
+attach(Auto)
+```
+
+## Fit a regression model
+
+```{r}
+lm.fit <- lm(mpg ~ horsepower , data = Auto, subset = train)
+```
+
+## Compute error on test set 
+
+```{r}
+## Make predtictions
+y_hat <- predict(lm.fit, Auto)
+y_hat
+##MSE on test
+## Method 1
+mean (( mpg - y_hat)[-train ] ^2)
+## Method 2
+mean (( mpg - predict(lm.fit , Auto))[-train ]^2)
+```
+
+## Polynomial regression
+
+```{r}
+lm.fit2 <- lm(mpg ~ poly(horsepower , 2), data = Auto , subset = train)
+mean (( mpg - predict(lm.fit2 , Auto))[-train ]^2)
+
+lm.fit3 <- lm(mpg ~ poly(horsepower , 3), data = Auto ,
+subset = train)
+mean (( mpg - predict(lm.fit3 , Auto))[-train ]^2)
+```
+
+
+## Perform the same calculations on a different training and test set
+
+```{r}
+set.seed (2)
+train <- sample (392 , 196)
+lm.fit <- lm(mpg ~ horsepower , subset = train)
+mean (( mpg - predict(lm.fit , Auto))[-train ]^2)
+
+lm.fit2 <- lm(mpg ~ poly(horsepower , 2), data = Auto, subset = train)
+mean (( mpg - predict(lm.fit2 , Auto))[-train ]^2)
+lm.fit3 <- lm(mpg ~ poly(horsepower , 3), data = Auto, subset = train)
+mean (( mpg - predict(lm.fit3 , Auto))[-train ]^2)
+
+```
+
+## Leave-One-Out Cross-Validation
+
+The LOOCV estimate can be  computed for any generalized
+linear model using the `glm()` and `cv.glm()` functions.
+
+```{r}
+## Method 1
+lm.fit <- lm(mpg ~ horsepower , data = Auto)
+coef(lm.fit)
+## Method 2 - without passing family
+glm.fit <- glm(mpg ~ horsepower , data = Auto)
+coef(glm.fit)
+```
+
+## LOOCV
+
+```{r}
+library(boot)
+glm.fit <- glm(mpg ~ horsepower , data = Auto)
+cv.err <- cv.glm(Auto , glm.fit)
+cv.err$delta
+```
+
+## Repeat the process for polynomials
+
+```{r}
+cv.error <- rep(0, 10)
+for (i in 1:10) {
+glm.fit <- glm(mpg ~ poly(horsepower , i), data = Auto)
+cv.error[i] <- cv.glm(Auto , glm.fit)$delta [1] }
+cv.error
+```
+
+## k-Fold Cross-Validation
+
+```{r}
+set.seed (17)
+cv.error.10 <- rep(0, 10)
+for (i in 1:10) {
+ glm.fit <- glm(mpg ~ poly(horsepower , i), data = Auto)
+ cv.error.10[i] <- cv.glm(Auto , glm.fit , K = 10)$delta [1]}
+cv.error.10
+```
+
+# Cross-validation using caret package
+
+```{r, warning=FALSE}
+library(caret)
+data(mtcars)
+set.seed(47)
+
+model <- train(mpg~ hp, mtcars, method = "lm",
+trControl = trainControl(method = "cv", number = 10, verboseIter = TRUE)
+) # number - number of folds
+
+model
+
+```
+
+## Random forest with caret package
+
+Hyperparameters
+
+mtry: Number of variable is randomly collected to be sampled at each split time.
+
+ntree: Number of branches will grow after each time split.
+
+
+
+```{r}
+library(randomForest)
+library(caret)
+
+
+# Random Search
+control <- trainControl(method="repeatedcv", number=10, repeats=3, search="random")
+set.seed(2)
+
+rf_random <- train(mpg~., data=mtcars, method="rf",  tuneLength=15, trControl=control)
+print(rf_random)
+plot(rf_random)
+```
+
+

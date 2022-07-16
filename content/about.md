@@ -30,5 +30,8 @@ Here's your roadmap for the semester!
 
 [Mini project](/miniproject.html)
 
+|[Slides](/L5.pdf)    	|  Reading | [Lab-Tutorial](/lab5.html) | Problems 
+|:-:	|:-:	|:-:	|:-:|
+
 ## Week 6
 

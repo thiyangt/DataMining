@@ -41,13 +41,9 @@ test error rate by holding out a subset of the training observations from the
 model training process, and then applying the model to those
 held out observations.
 
----
 
-In-class visualization
 
----
-
-# The Validation Set Approach
+## The Validation Set Approach
 
 - Randomly dividing the available data into two parts, a training set and a validation set or hold-out set. 
 

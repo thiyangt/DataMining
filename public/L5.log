@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.5.30)  16 JUL 2022 07:14
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.5.30)  16 JUL 2022 07:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1095,7 +1095,7 @@ Overfull \vbox (16.67491pt too high) detected at line 124
 
 ]
 LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 
-170.
+197.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1104,34 +1104,34 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-70.
+97.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-170.
+197.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-170.
+197.
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 170.
+(Font)              <12> on input line 197.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 170.
+(Font)              <8> on input line 197.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 170.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 170
+(Font)              <6> on input line 197.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 197
 .
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 170
+LaTeX Font Info:    Trying to load font information for U+msb on input line 197
 .
 (/usr/local/texlive/2022/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1139,28 +1139,22 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <12> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 170.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 197.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 170.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 197.
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <6> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 170.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 197.
 [6
 
 ] [7
 
-] [8
+]
+Missing character: There is no − ("2212) in font rm-lmss12!
+[8
 
 ] [9
 
 ] [10
-
-]
-Missing character: There is no − ("2212) in font rm-lmss12!
-[11
-
-] [12
-
-] [13
 
 ]
 \tf@nav=\write6
@@ -1174,15 +1168,15 @@ Missing character: There is no − ("2212) in font rm-lmss12!
 
 (./L5.aux)
 Package rerunfilecheck Info: File `L5.out' has not changed.
-(rerunfilecheck)             Checksum: 83E42158CA87AC08C22AF8ADDFF356F2;187.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 29667 strings out of 476179
- 643845 string characters out of 5809544
- 959924 words of memory out of 5000000
- 49797 multiletter control sequences out of 15000+600000
+ 29619 strings out of 476179
+ 642298 string characters out of 5809544
+ 960543 words of memory out of 5000000
+ 49749 multiletter control sequences out of 15000+600000
  481338 words of font info for 59 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 128i,13n,122p,1805b,750s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 128i,13n,122p,1805b,580s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on L5.pdf (13 pages).
+Output written on L5.pdf (10 pages).

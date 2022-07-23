@@ -26,12 +26,15 @@ Here's your roadmap for the semester!
 |[Slides](/L4.pdf)    	|  Reading | [Lab-Tutorial](/L4lab.R) | Problems 
 |:-:	|:-:	|:-:	|:-:|
 
-## Week 5
+## Week 5-6
 
 [Mini project](/miniproject.html)
 
 |[Slides](/L5.pdf)    	|  [Reading](https://topepo.github.io/caret/available-models.html) | [Lab-Tutorial](/lab5.html) | Problems 
 |:-:	|:-:	|:-:	|:-:|
 
-## Week 6
+## Week 7
+
+[Tidy modeling](/tidymodels/tidymodels.html)
+
 

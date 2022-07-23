@@ -1,0 +1,96 @@
+---
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Mid-term evaluation
+
+Total marks - 100 marks
+
+No submission or late submission (without special permission) - 0 marks
+
+## Rules
+
+
+Assignment opening date: 16 July 2022
+
+Submission date: 23 July 2022
+
+Extensions of time for submission: only the following categories are allowed
+
+**Category A**
+
+An illness that requires the student to miss all of his or her classes for 2 days or more
+
+**Category B**
+
+A period of grief for loss of a family member or friend
+
+**Category C**
+
+A family emergency
+
+**Philosophy driving our late policy has three goals**
+
+- Keep things fair
+
+- Encourage good time-management
+
+- Encouragement and appreciation of on time submission students.
+
+
+**How to deal with emergencies like a computer breakdown?**
+
+Submit a handwritten assignment: Write the solution you would take if you had access to a computer. You should write all the necessary steps and give reasons wherever necessary, and submit the assignment.
+
+You will be asked to submit the computer-based outputs at a later date.
+
+# Task
+
+I have assigned each one of you a separate data set (see Table 1). Develop a suitable model to predict the response variable using other necessary information available in the dataset.
+
+Your report should include following information
+
+1. EDA
+
+2. Model selection and evaluation
+
+3. Model comparison against several benchmark (eg: naive approach, etc) approaches
+
+4. R codes related to your analysis
+
+5. Conclusions 
+
+Final output: Report and video  recording of a summary
+
+The report should be submitted in PDF format. 
+
+Video: Prepare a 1 slide and present a summary within 3 minutes. 
+
+The allocation of datasets and tasks are as follows
+
+
+\begin{table}[ht]
+\caption{Allocation of datasets and tasks}
+\begin{tabular}{|p{3cm}|p{5cm}|p{8cm}|}
+\hline
+ Index no. & Dataset and R package &  Response variable\\ \hline
+ GS/MSAS/001 & MLDataR, PreDiabetes  & HbA1C \\ \hline
+ GS/MSAS/002 & MLDataR, care\_home\_incidents & CareHomeFail \\ \hline
+ GS/MSAS/004 & MLDataR, thyroid\_disease & FTI\_reading (Do not use FTI\_measured as an independent variable) \\ \hline
+ GS/MSAS/006 & MLDataR, diabetes\_data  & DiabeticClass \\ \hline
+ GS/MSAS/009 & MLDataR, heartdisease & HeartDisease \\ \hline
+ GS/MSAS/010 & MLDataR, thyroid\_disease & FTI\_measured (Do not use FTI\_reading as an independent variable) \\ \hline
+ GS/MSAS/011 & MLDataR, PreDiabetes   & Age\_Diabetes \\ \hline
+ GS/MSAS/013 & MLDataR, care\_home\_incidents & UnexpectedDeaths \\ \hline
+ GS/MSAS/017 & MLDataR, thyroid\_disease & tumor \\ \hline
+ GS/MSAS/022 & MLDataR, diabetes\_data & Obesity \\ \hline
+ GS/MSAS/023 &  MLDataR, heartdisease & Cholesterol \\ \hline
+ GS/MSAS/024 & MLDataR, long\_stayers & stranded.label \\ \hline
+\end{tabular}
+\end{table}
+
+Please inform the lecturer-in-charge if your index number is not listed in the above table.

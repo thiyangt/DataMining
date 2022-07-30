@@ -222,6 +222,7 @@ M44 <- c(5, rep(NA, 4), 4, rep(NA, 4))
 M48 <- c(rep(NA, 6), 3, rep(NA, 3))
 df <- data.frame(ID, M1, M5, M8, M17, M18, M28, M30, M44, M48)
 df
+summary(df, na.rm=TRUE)
 
 ```
 

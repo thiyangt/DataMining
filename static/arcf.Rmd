@@ -9,6 +9,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Application: In-class demo
+
+https://www.amazon.com/
+
 # Association rule
 
 - Also called **affinity analysis** or **market basket analysis**.

@@ -38,3 +38,6 @@ Here's your roadmap for the semester!
 [Tidy modeling](/tidymodels/tidymodels.html)
 
 
+## Week 8
+
+[Association rules and collaborative filtering](/arcf.html)

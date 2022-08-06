@@ -207,11 +207,102 @@ Repeatedly links pairs of clusters until every data object is included in the hi
 
 5. Ward's method: Consider "loss of information" that occurs when records are clustered together.
 
+![](linkage.png)
+
+Further reading and source: https://livebook.manning.com/book/machine-learning-for-mortals-mere-and-otherwise/chapter-17/v-7/65
+
 ![](clus.jpeg)
 
 Source: https://stats.stackexchange.com/questions/426760/should-we-most-of-the-time-use-wards-method-for-hierarchical-clustering
 
 <!--Source: https://dataaspirant.com/hierarchical-clustering-r/-->
+
+# Dendrogram
+
+Tree-like diagram that summarizes the process of clustering.
+
+# Example
+
+```{r}
+library(tidyverse)
+library(cluster)
+library(factoextra)
+library(gridExtra)
+data('USArrests') 
+USArrests
+head(USArrests)
+summary(USArrests)
+
+# Normalize 0-1 datasets:
+df <- USArrests %>% mutate_all(function(x) {(x - min(x)) / (max(x) - min(x))})
+
+# Set rowname: 
+row.names(df) <- row.names(USArrests)
+
+# Compute distances: 
+dd <- dist(df, method = "euclidean")
+
+# Visualize the dissimilarity: 
+fviz_dist(dd, lab_size = 7)
+# Perform hierarchical clustering: 
+hc1 <- hclust(dd, method = "single")
+hc1
+plot(hc1, hang=-1, ann=FALSE)
+# Create a function of dendrogram:
+
+dend_func <- (function(x) {fviz_dend(x, 
+          k = 4,   
+          cex = 0.5, 
+          rect = TRUE, 
+          rect_fill = TRUE, 
+          horiz = FALSE, 
+          palette = "jco", 
+          rect_border = "jco", 
+          color_labels_by_k = TRUE) })
+dend_func(hc1) -> basic_plot
+basic_plot + theme_gray() + 
+         theme(plot.margin = unit(rep(0.7, 4), "cm")) +  
+  labs(title = "Hierarchical Clustering with Single Linkage Method")
+
+clust_func<-(function(x){fviz_cluster(list(data = df, cluster = paste0("Group", x)), 
+                         alpha = 1, 
+                         colors = x, 
+                         labelsize = 9, 
+                         ellipse.type = "norm")})
+sgroup<- cutree(hc1, k = 4)
+USArrests$sgroup <- factor(sgroup)
+head(USArrests)
+library(GGally)
+ggplot(USArrests, aes(x=Murder, y=Assault, color = sgroup)) + geom_point()
+ggplot(USArrests, aes(x=Murder, y=UrbanPop, color = sgroup)) + geom_point()
+
+
+
+hc2 <- hclust(dd, method = "average")
+plot(hc2, hang=-1, ann=FALSE)
+dend_func(hc2) -> basic_plot2
+basic_plot2 + theme_gray() + 
+         theme(plot.margin = unit(rep(0.7, 4), "cm")) +  
+  labs(title = "Hierarchical Clustering with Average Linkage Method")
+
+hc3 <- hclust(dd, method = "ward.D2")
+plot(hc3, hang=-1, ann=FALSE)
+dend_func(hc3) -> basic_plot3
+basic_plot3 + theme_gray() + 
+         theme(plot.margin = unit(rep(0.7, 4), "cm")) +  
+  labs(title = "Hierarchical Clustering with Ward Linkage Method")
+```
+
+# Validation of clusters
+
+1. Cluster interpretability
+
+2. Cluster stability
+
+3. Cluster separation
+
+4. Number of clusters
+
 
 # k-means Algorithm:
 

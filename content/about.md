@@ -41,3 +41,7 @@ Here's your roadmap for the semester!
 ## Week 8
 
 [Association rules and collaborative filtering](/arcf.html)
+
+## Week 9
+
+[Clustering](/clustering.html)

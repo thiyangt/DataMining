@@ -297,6 +297,14 @@ basic_plot3 + theme_gray() +
 
 1. Cluster interpretability
 
+```{r}
+sgroup3<- cutree(hc3, k = 4)
+USArrests$sgroup3 <- factor(sgroup3)
+head(USArrests)
+library(GGally)
+ggpairs(USArrests, aes(col=sgroup3))
+```
+
 2. Cluster stability
 
 3. Cluster separation
@@ -317,5 +325,30 @@ a) Partition by assigning or reassigning all data objects to their closest clust
 b) Compute new cluster centers as mean value of the objects in each cluster. 
 
 Until no change in cluster center calculation
+
+## Example
+
+```{r}
+data(USArrests)
+library(corrplot)
+corrplot(cor(USArrests), method = "number",
+         type = "lower")
+USArrests <- scale(USArrests)
+dim(USArrests)
+head(USArrests)
+dist.eucl <- dist(USArrests, method = "euclidean")
+head(dist.eucl)
+fviz_dist(dist.eucl)
+km.res <- kmeans(USArrests, 4, nstart = 20)
+km.res
+df_member <- cbind(USArrests, cluster = km.res$cluster)
+head(df_member)
+fviz_cluster(km.res, data = USArrests,
+             palette=c("red", "blue", "black", "darkgreen"),
+             ellipse.type = "euclid",
+             star.plot = T,
+             repel = T,
+             ggtheme = theme())
+```
 
 <!--https://www.r-bloggers.com/2015/09/bootstrap-evaluation-of-clusters/-->

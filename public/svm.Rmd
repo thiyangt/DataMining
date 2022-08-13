@@ -1,0 +1,173 @@
+---
+title: " Support Vector Machines (SVM)"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+
+The objective of the support vector machine algorithm is to find a hyperplane in an N-dimensional space(N — the number of features) that distinctly classifies the data points.
+
+# Hyperplanes and Support Vectors
+
+In-class
+
+# Linearly separable vs non-linearly separable
+
+In-class
+
+\vspace{5cm}
+
+# Illustration
+
+- Maximized margins
+
+```{r, echo=FALSE, message=FALSE,warning=FALSE}
+library(tidyverse)
+set.seed(12)
+x <- c(rnorm(20, mean = 2), rnorm(20, mean=5))
+y1 <- 0.5*x[1:20] + rnorm(20)
+y2 <- 0.5*x[21:40] + rnorm(20)
+y <- c(y1, y2)
+z <- factor(c(rep(1, 20), rep(0, 20)))
+df <- tibble(x=x, y=y, z=z)
+ggplot(df, aes(x=x, y=y,col=z)) + geom_point(size=2)
+```
+
+
+- There are many possible hyperplanes that could be chosen to classify data points.
+
+- Our objective is to find a plane that has the maximum margin.
+
+- Support vectors: data points that are closer to the hyperplane and influence the position and orientation of the hyperplane.
+
+# R code
+
+```{r}
+library(palmerpenguins)
+data(penguins)
+
+```
+
+Splitting data into training and test set
+
+```{r}
+library(tidymodels)
+set.seed(123)
+penguins <- na.omit(penguins) 
+penguins_split <- initial_split(penguins, strata = species)
+penguins_train <- training(penguins_split)
+summary(penguins_train)
+penguins_test <- testing(penguins_split)
+summary(penguins_test)
+
+```
+
+
+Next, let’s create cross-validation resamples of the training data, to evaluate our models.
+
+```{r}
+set.seed(234)
+penguins_folds <- vfold_cv(penguins_train, strata = species)
+penguins_folds
+```
+
+Next, let’s preprocess our data to get it ready for modeling.
+
+```{r}
+penguins_rec <- recipe(species ~ island + bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g + sex, data = penguins_train) 
+
+penguins_rec2 <- recipe(species ~ island + bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g + sex, data = penguins_train)  %>%
+   step_normalize(body_mass_g)
+
+penguins_prep <- prep(penguins_rec)
+penguins_prep
+juice(penguins_prep)
+```
+
+
+## Random forest
+
+```{r}
+rf_spec <- rand_forest(trees = 1000) %>%
+  set_engine("ranger") %>%
+  set_mode("classification")
+
+rf_spec
+```
+
+## SVM
+
+```{r}
+svm_spec <- svm_rbf(cost = 0.5) %>%
+  set_engine("kernlab") %>%
+  set_mode("classification")
+
+svm_spec
+```
+
+
+```{r}
+penguins_wf <- workflow() %>%
+  add_recipe(penguins_rec)
+
+penguins_wf
+```
+
+```{r}
+## Illustration only
+
+penguins_prep2 <- prep(penguins_rec2)
+penguins_prep2
+juice(penguins_prep2)
+penguins_wf2 <- workflow() %>%
+  add_recipe(penguins_rec2)
+penguins_wf2
+```
+
+Now we can add a model, and the fit to each of the resamples. First, we can fit the random forest model.
+
+```{r}
+set.seed(1234)
+rf_rs <- penguins_wf %>%
+  add_model(rf_spec) %>%
+  fit_resamples(
+    resamples = penguins_folds,
+    metrics = metric_set(roc_auc, accuracy, sens, spec),
+    control = control_grid(save_pred = TRUE)
+  )
+rf_rs 
+
+```
+
+## SVM
+
+```{r}
+svm_rs <- penguins_wf %>%
+  add_model(svm_spec) %>%
+  fit_resamples(
+    resamples = penguins_folds,
+    metrics = metric_set(roc_auc, accuracy, sens, spec),
+    control = control_grid(save_pred = TRUE)
+  )
+
+```
+
+## Evaluate Model
+
+Random forests
+
+```{r}
+collect_metrics(rf_rs)
+conf_mat_resampled(rf_rs)
+```
+
+SVM
+
+```{r}
+collect_metrics(svm_rs)
+conf_mat_resampled(svm_rs)
+```

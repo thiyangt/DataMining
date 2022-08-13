@@ -1,0 +1,49 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+# Loading Libraries
+library(arules)
+library(RColorBrewer)
+
+# import dataset
+data("Groceries")
+
+# using apriori() function
+#‘Groceries’ is the transaction data
+
+#‘parameter’ is a named list that specifies the minimum support and confidence for finding the association rules. The default behavior is to mine the rules with minimum support of 0.1 and 0.8 as the minimum confidence. Here, we have specified the minimum support to be 0.01 and the minimum confidence to be 0.2.
+rules <- apriori(Groceries,
+				parameter = list(supp = 0.01, conf = 0.2))
+
+# using inspect() function
+inspect(rules[1:10])
+
+# using itemFrequencyPlot() function
+arules::itemFrequencyPlot(Groceries, topN = 20,
+						col = brewer.pal(8, 'Pastel2'),
+						main = 'Relative Item Frequency Plot',
+						type = "relative",
+						ylab = "Item Frequency (Relative)")
+
+
+```
+
+
+Some association rules that we can conclude from this program are: 
+
+- If hard cheese is bought, then whole milk is also bought.
+
+- If buttermilk is bought, then whole milk is also bought with it.
+
+- If buttermilk is bought, then other vegetables are also bought together.
+
+- Also, whole milk has high support as well as a confidence value.
+
+- Hence, it will be profitable to put ‘whole milk’ in a visible and reachable shelf as it is one of the most frequently bought items. Also, near the shelf where ‘buttermilk’ is put, there should be shelves for ‘whole milk’ and ‘other vegetables’ as their confidence value is quite high. So there is a higher probability of buying them along with buttermilk. Thus, with similar actions, we can aim at increasing the sales and profits of the grocery store by analyzing users’ shopping patterns.

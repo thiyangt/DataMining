@@ -45,3 +45,7 @@ Here's your roadmap for the semester!
 ## Week 9
 
 [Clustering](/clustering.html)
+
+## Week 10
+
+[SVM](/svm.html)

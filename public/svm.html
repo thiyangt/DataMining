@@ -216,7 +216,7 @@ data(penguins)</code></pre>
 ## ✖ dplyr::lag()      masks stats::lag()
 ## ✖ yardstick::spec() masks readr::spec()
 ## ✖ recipes::step()   masks stats::step()
-## • Dig deeper into tidy modeling with R at https://www.tmwr.org</code></pre>
+## • Search for functions across packages at https://www.tidymodels.org/find/</code></pre>
 <pre class="r"><code>set.seed(123)
 penguins &lt;- na.omit(penguins) 
 penguins_split &lt;- initial_split(penguins, strata = species)
@@ -464,6 +464,60 @@ rf_rs </code></pre>
 ## 7 Gentoo     Adelie      0  
 ## 8 Gentoo     Chinstrap   0  
 ## 9 Gentoo     Gentoo      8.9</code></pre>
+</div>
+<div id="evaluation-on-test-set" class="section level2">
+<h2>Evaluation on test set</h2>
+<pre class="r"><code>rf_fit &lt;- rf_spec %&gt;%
+  fit(species ~ island + bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g + sex, data = penguins_train)
+rf_fit</code></pre>
+<pre><code>## parsnip model object
+## 
+## Ranger result
+## 
+## Call:
+##  ranger::ranger(x = maybe_data_frame(x), y = y, num.trees = ~1000,      num.threads = 1, verbose = FALSE, seed = sample.int(10^5,          1), probability = TRUE) 
+## 
+## Type:                             Probability estimation 
+## Number of trees:                  1000 
+## Sample size:                      249 
+## Number of independent variables:  6 
+## Mtry:                             2 
+## Target node size:                 10 
+## Variable importance mode:         none 
+## Splitrule:                        gini 
+## OOB prediction error (Brier s.):  0.02190814</code></pre>
+<pre class="r"><code>rf_testing_pred &lt;- 
+  predict(rf_fit, penguins_test, type = &quot;prob&quot;)
+rf_testing_pred</code></pre>
+<pre><code>## # A tibble: 84 × 3
+##    .pred_Adelie .pred_Chinstrap .pred_Gentoo
+##           &lt;dbl&gt;           &lt;dbl&gt;        &lt;dbl&gt;
+##  1        0.990         0.0100      0       
+##  2        0.975         0.0251      0       
+##  3        0.993         0.00726     0       
+##  4        0.992         0.00757     0       
+##  5        0.996         0.00358     0.00025 
+##  6        0.998         0.00208     0.000167
+##  7        0.966         0.0339      0       
+##  8        0.679         0.311       0.00953 
+##  9        0.978         0.0221      0       
+## 10        0.997         0.00336     0       
+## # … with 74 more rows</code></pre>
+<pre class="r"><code>rf_training_pred &lt;- 
+  predict(rf_fit, penguins_train) %&gt;% 
+  bind_cols(predict(rf_fit, penguins_train, type = &quot;prob&quot;)) %&gt;% 
+  # Add the true outcome data back in
+  bind_cols(penguins_train %&gt;% 
+              select(species))
+library(yardstick)
+rf_training_pred %&gt;%                # training set predictions
+  accuracy(truth = species, .pred_class)</code></pre>
+<pre><code>## # A tibble: 1 × 3
+##   .metric  .estimator .estimate
+##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
+## 1 accuracy multiclass     0.996</code></pre>
+<p>“Resampling allows us to simulate how well our model will perform on new data, and the test set acts as the final, unbiased check for our model’s performance.”</p>
+<p>Source: <a href="https://www.tidymodels.org/start/resampling/" class="uri">https://www.tidymodels.org/start/resampling/</a></p>
 </div>
 </div>
 

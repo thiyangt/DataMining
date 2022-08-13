@@ -5,6 +5,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 # Introduction
@@ -173,6 +174,29 @@ conf_mat_resampled(svm_rs)
 ```
 
 ## Evaluation on test set
+
+```{r}
+rf_fit <- rf_spec %>%
+  fit(species ~ island + bill_length_mm + bill_depth_mm + flipper_length_mm + body_mass_g + sex, data = penguins_train)
+rf_fit
+rf_testing_pred <- 
+  predict(rf_fit, penguins_test, type = "prob")
+rf_testing_pred
+```
+
+```{r}
+rf_training_pred <- 
+  predict(rf_fit, penguins_train) %>% 
+  bind_cols(predict(rf_fit, penguins_train, type = "prob")) %>% 
+  # Add the true outcome data back in
+  bind_cols(penguins_train %>% 
+              select(species))
+library(yardstick)
+rf_training_pred %>%                # training set predictions
+  accuracy(truth = species, .pred_class)
+```
+
+
 
 
 "Resampling allows us to simulate how well our model will perform on new data, and the test set acts as the final, unbiased check for our model’s performance."

@@ -358,6 +358,7 @@ fviz_cluster(km.res, data = USArrests,
 dist(km.res$centers)
 ```
 
+Demo: https://www.youtube.com/watch?v=5I3Ei69I40s
 
 # Methods to determine optimum number of clusters
 

@@ -49,3 +49,7 @@ Here's your roadmap for the semester!
 ## Week 10
 
 [SVM](/svm.html)
+
+## Week 11
+
+[Collaborative filtering](/cf.html)
